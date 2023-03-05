@@ -3,13 +3,18 @@ import { useEffect, useState, memo } from "react";
 export default () => {
   const [users, setUsers] = useState([]);
 
-  window.submitForm = (name) => {
-    alert("Submiting form for " + name);
-    users[users.length - 1].name += " (*)"; // mark the previous employee
-    users.push({ name: name });
-    setUsers(users);
-  };
-
+window.submitForm = (name) => {
+  setUsers(users => {
+    const lastUser = users[users.length - 1];
+    const updatedLastUserName = `${lastUser.name} (*)`;
+    const updatedUsers = [
+      ...users.slice(0, -1),
+      { name: updatedLastUserName },
+      { name }
+    ];
+    return updatedUsers;
+  });
+};
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users").then((foo) => {
       foo.json().then((bar) => {
@@ -27,7 +32,7 @@ export default () => {
       </h4>
       <div>
         {users.map((d, index) => (
-          <Name data={d} />
+          <Name data={d} key={index} />
         ))}
       </div>
     </div>
