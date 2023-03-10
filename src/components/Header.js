@@ -8,7 +8,7 @@ export default () => {
       return new Promise((res) => {
         fetch("https://jsonplaceholder.typicode.com/users").then((foo) => {
           foo.json().then((bar) => {
-            console.log("test");
+            // console.log("test");
             setUsers(bar);
             res();
           });

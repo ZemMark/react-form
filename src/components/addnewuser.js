@@ -10,10 +10,16 @@ export const AddNewUser = () => {
   };
 
   const foo = () => {
-    if (age < 18) {
-      alert("You are not old enough to be our employee");
-    } else {
-      window.submitForm(newName);
+    try {
+      
+      if (age < 18) {
+        alert("You are not old enough to be our employee");
+      } else {
+        window.submitForm(newName);
+        console.log(`New user : ${newName}, his age: ${age}y.o.`);
+      }
+    } catch (error) {
+      console.error(error)
     }
   };
 
@@ -24,7 +30,9 @@ export const AddNewUser = () => {
       <input type="text" onChange={doSomething} placeholder="Type your name" />
       <input
         type="number"
-        onChange={(d) => setAge(d.target.value)}
+        onChange={(d) => {
+          setAge(d.target.value)
+        }}
         placeholder="Type your age"
       />
       <button onClick={foo}>Submit form</button>
