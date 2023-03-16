@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 let renderCount = 1;
 
 const Component = ({ data }) => {
-  useEffect(() => renderCount++);
+  useEffect(() => { renderCount++ });
 
   if (!data.age) return null;
 
